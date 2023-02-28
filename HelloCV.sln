@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32802.440
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HelloCV", "HelloCV.vcxproj", "{98CE562E-B57C-4C36-9AD3-56578387B3F4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{98CE562E-B57C-4C36-9AD3-56578387B3F4}.Debug|x64.ActiveCfg = Debug|x64
+		{98CE562E-B57C-4C36-9AD3-56578387B3F4}.Debug|x64.Build.0 = Debug|x64
+		{98CE562E-B57C-4C36-9AD3-56578387B3F4}.Debug|x86.ActiveCfg = Debug|Win32
+		{98CE562E-B57C-4C36-9AD3-56578387B3F4}.Debug|x86.Build.0 = Debug|Win32
+		{98CE562E-B57C-4C36-9AD3-56578387B3F4}.Release|x64.ActiveCfg = Release|x64
+		{98CE562E-B57C-4C36-9AD3-56578387B3F4}.Release|x64.Build.0 = Release|x64
+		{98CE562E-B57C-4C36-9AD3-56578387B3F4}.Release|x86.ActiveCfg = Release|Win32
+		{98CE562E-B57C-4C36-9AD3-56578387B3F4}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {18B4B451-508D-42C2-8430-83A340D85135}
+	EndGlobalSection
+EndGlobal
