@@ -656,8 +656,85 @@ int main(int argc, char* argv[])
 }*/
 
 // convex hull
-#include "opencv2/opencv.hpp"
+/*#include "opencv2/opencv.hpp"
 #include <iostream>
 
 using namespace cv;
 using namespace std;
+
+int main()
+{
+	Mat src = imread("Paper.bmp");
+	Mat dst = src.clone();
+	GaussianBlur(src, src, Size(3, 3), 0.0);
+
+	Mat hsv;
+	cvtColor(src, hsv, COLOR_BGR2HSV);
+
+	Mat b_img;
+	Scalar lowerb(0, 40, 0);
+	Scalar upperb(20, 180, 255);
+	inRange(hsv, lowerb, upperb, b_img);
+
+	erode(b_img, b_img, Mat());
+	dilate(b_img, b_img, cv::Mat(), Point(-1, -1), 2);
+
+	vector<vector<Point>> contours;
+	findContours(b_img, contours, noArray(), RETR_EXTERNAL, CHAIN_APPROX_SIMPLE);
+	cout << "contours.size()= " << contours.size() << endl;
+
+	if (contours.size() < 1)
+		return 0;
+
+	int maxK = 0;
+	double maxArea = contourArea(contours[0]);
+
+	for (int k = 1; k < contours.size(); k++)
+	{
+		double area = contourArea(contours[k]);
+
+		if (area > maxArea)
+		{
+			maxK = k;
+			maxArea = area;
+		}
+	}
+
+	vector<Point> handContour = contours[maxK];
+	vector<int> hull;
+	convexHull(handContour, hull);													// points: 입력 컨투어, hull: 볼록 선체 결과, clockwise/returnPoints 선택 지정
+	cout << "hull.size()= " << hull.size() << endl;
+
+	vector<Point> ptsHull;
+	for (int k = 0; k < hull.size(); k++)
+	{
+		int i = hull[k];
+		ptsHull.push_back(handContour[i]);
+	}
+
+	drawContours(dst, vector<vector<Point>>(1, ptsHull), 0, Scalar(255, 0, 0), 2);
+
+	imshow("dst_Hull", dst);
+
+	vector<Vec4i> defects;
+	convexityDefects(handContour, hull, defects);
+
+	for (int k = 0; k < defects.size(); k++)
+	{
+		Vec4i v = defects[k];
+		Point ptStart = handContour[v[0]];											// start: 오목한 각이 시작되는 컨투어의 인덱스
+		Point ptEnd = handContour[v[1]];											// end: 오목한 각이 끝나는 컨투어의 인덱스
+		Point ptFar = handContour[v[2]];											// farthest: 볼록 선체에서 가장 먼 오목한 지점의 컨투어 인덱스, distance: farthest와 볼록 선체와의 거리
+
+		circle(dst, ptStart, 3, Scalar(0, 0, 255), 2);
+		circle(dst, ptEnd, 3, Scalar(0, 0, 255), 2);
+		circle(dst, ptFar, 3, Scalar(255, 0, 255), 2);
+	}
+
+	cout << "defects.size()= " << defects.size() << endl;
+	imshow("dst", dst);
+
+	waitKey();
+	return 0;
+}*/
+
