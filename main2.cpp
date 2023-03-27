@@ -757,6 +757,8 @@ int main()
 
 	Scalar lowery = Scalar(20, 100, 100);																	// HSV color 노란색 범위 지정
 	Scalar uppery = Scalar(30, 255, 255);
+	Scalar lowerr = Scalar(0, 100, 100);																	// HSV color 빨간색 범위 지정
+	Scalar upperr = Scalar(10, 255, 255);
 
 	Mat frame;
 	Mat hsv_frame;
@@ -771,21 +773,25 @@ int main()
 
 		Mat yellow_mask, yellow_frame;
 		inRange(hsv_frame, lowery, uppery, yellow_mask);													// src_hsv 영상에서 HSV 색 성분 범위가 lowerb에서 upperb 사이인 위치의 픽셀만 흰색으로 설정한 mask 영상 생성
-
-
 		bitwise_and(frame, hsv_frame, yellow_frame, yellow_mask);											// frame + hsv_frame + yellow_mask = yellow_frame
 
+		Mat red_mask, red_frame;
+		inRange(hsv_frame, lowerr, upperr, red_mask);
+		bitwise_and(frame, frame, red_frame, red_mask);														// frame + hsv_frame + red_mask = red_frame
+
 		Mat labels, stats, centroids;
-		int cnt = connectedComponentsWithStats(yellow_mask, labels, stats, centroids);						// 전체 레이블 개수로 return, cnt = labels - 1
+		int cnt1 = connectedComponentsWithStats(yellow_mask, labels, stats, centroids);						// 전체 레이블 개수로 return, cnt = labels - 1
+		int cnt2 = connectedComponentsWithStats(red_mask, labels, stats, centroids);
 
 		int rock = 0;
 		int scissors = 0;
 		int paper = 0;
-		int num_yellow = cnt - 1;
+		int num_yellow = cnt1 - 1;
+		int num_red = cnt2 - 1;
 
 		String text;
 
-		if (num_yellow == 0)
+		if (num_red > 0)																					// 빨간색 스티커가 0개보다 많으면 (1개)
 			text = "Rock!";
 
 		else if (num_yellow == 2)
@@ -798,6 +804,7 @@ int main()
 
 		imshow("frame", frame);
 		imshow("yellow", yellow_frame);
+		imshow("red", red_frame);
 
 		if (waitKey(1) == 'q')
 			break;
